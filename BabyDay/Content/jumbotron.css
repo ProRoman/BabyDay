@@ -3,3 +3,10 @@ body {
   padding-top: 50px;
   padding-bottom: 20px;
 }
+
+.navbar-text {
+    margin-top: 7.5px;
+    margin-bottom: 7.5px;
+    display: inline-block;
+    float: initial;
+}
