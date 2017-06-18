@@ -10,3 +10,7 @@ body {
     display: inline-block;
     float: initial;
 }
+
+.btn a {
+    color: white; text-decoration: none
+}

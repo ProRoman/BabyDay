@@ -16,13 +16,13 @@ namespace BabyDay.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(Account account)
+        public ActionResult Signin(Account account)
         {
             return View(account);
         }
 
         [HttpPost]
-        public ActionResult Register(Account account)
+        public ActionResult Signup(Account account)
         {
             return View();
         }
