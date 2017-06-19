@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace BabyDay
 {
@@ -16,6 +15,10 @@ namespace BabyDay
             bundles.Add(new StyleBundle("~/Content/bootstrap-jumbotron").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/jumbotron.css"));
+
+            bundles.Add(new StyleBundle("~/Content/bootstrap-signin").Include(
+                "~/Content/bootstrap.css",
+                "~/Content/signin.css"));
         }
     }
 }

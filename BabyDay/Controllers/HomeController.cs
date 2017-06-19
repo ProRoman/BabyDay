@@ -9,20 +9,31 @@ namespace BabyDay.Controllers
 {
     public class HomeController : Controller
     {
-        [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Signin(Account account)
+        [HttpGet]
+        public ActionResult Signin()
         {
-            return View(account);
+            return View();
         }
 
         [HttpPost]
-        public ActionResult Signup(Account account)
+        public ActionResult Signin(SigninData signinData)
+        {
+            if (ModelState.IsValid)
+            {
+                return View();
+            }
+            else
+            {
+                return View();
+            }
+        }
+        
+        public ActionResult Signup()
         {
             return View();
         }

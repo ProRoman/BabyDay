@@ -1,0 +1,37 @@
+﻿@using System.Web.Optimization
+@model BabyDay.Models.SigninData
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/bootstrap-signin")
+    <title>Signin</title>
+</head>
+<body>
+<div class="container">
+    @using (Html.BeginForm("Signin", "Home", FormMethod.Post, new { @class = "form-signin" }))
+    {
+        @Html.ValidationSummary()
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <div class="form-group">
+            @Html.TextBoxFor(x => x.Email, new {type = "email", id = "inputEmail", @class = "form-control", placeholder = "Email address", autofocus = "autofocus"})
+        </div>
+        <div class="form-group">
+            @Html.TextBoxFor(x => x.Password, new {type = "password", id = "inputPassword", @class = "form-control", placeholder = "Password"})
+        </div>
+        <div class="checkbox">
+            <label>
+                @Html.CheckBoxFor(x => x.RememberMe, new {type = "checkbox"}) Remember me
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    }
+</div>
+</body>
+</html>
