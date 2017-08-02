@@ -32,8 +32,15 @@ namespace BabyDay.Controllers
                 return View();
             }
         }
-        
+
+        [HttpGet]
         public ActionResult Signup()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Signup(SignupData signupData)
         {
             return View();
         }
