@@ -1,7 +1,13 @@
-﻿using System.Web.Mvc;
-using Autofac;
+﻿using Autofac;
 using Autofac.Integration.Mvc;
+using BabyDay.Models.Entity;
+using BabyDay.Services;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.DataProtection;
 using Owin;
+using System.Web;
+using System.Web.Mvc;
 
 namespace BabyDay
 {
@@ -25,10 +31,10 @@ namespace BabyDay
         {
             var builder = new ContainerBuilder();
 
-            // Register MVC controllers.
-            builder.RegisterControllers(typeof(MvcApplication).Assembly);
-
             RegisterTypes(builder);
+
+            // Register MVC controllers.
+            builder.RegisterControllers(typeof(MvcApplication).Assembly);            
             
             var container = builder.Build();
 
@@ -37,7 +43,11 @@ namespace BabyDay
 
         private void RegisterTypes(ContainerBuilder builder)
         {
-
+            builder.RegisterType<ApplicationDbContext>().AsSelf().InstancePerRequest();
+            builder.RegisterType<ApplicationUserStore>().As<IUserStore<ApplicationUser>>().InstancePerRequest();
+            builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
+            builder.RegisterType<ApplicationSignInManager>().AsSelf().InstancePerRequest();
+            builder.Register<IAuthenticationManager>(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
         }
     }
 }
