@@ -16,6 +16,7 @@
 <body>
     @using (Html.BeginForm("Signup", "Home", FormMethod.Post, new { @class = "form-signin" }))
     {
+        @Html.AntiForgeryToken()
         @Html.ValidationSummary()
         <h2 class="form-signin-heading">Please sign up</h2>
         <div class="form-group">

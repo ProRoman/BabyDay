@@ -1,6 +1,4 @@
-﻿using BabyDay.Models.Entity;
-using BabyDay.Services;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
@@ -19,7 +17,7 @@ namespace BabyDay
                 ExpireTimeSpan = TimeSpan.FromMinutes(60),
                 SlidingExpiration = true,
                 CookieSecure = CookieSecureOption.SameAsRequest,
-                LoginPath = new PathString("/Account/Login")
+                LoginPath = new PathString("/Home/Signin")
             });
         }
     }

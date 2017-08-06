@@ -15,8 +15,9 @@
 </head>
 <body>
 <div class="container">
-    @using (Html.BeginForm("Signin", "Home", FormMethod.Post, new { @class = "form-signin" }))
+    @using (Html.BeginForm("Signin", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-signin" }))
     {
+        @Html.AntiForgeryToken()
         @Html.ValidationSummary()
         <h2 class="form-signin-heading">Please sign in</h2>
         <div class="form-group">
