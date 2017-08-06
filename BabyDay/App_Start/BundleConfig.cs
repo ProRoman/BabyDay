@@ -10,7 +10,8 @@ namespace BabyDay
                 "~/Scripts/jquery-{version}.js"));
            
             bundles.Add(new ScriptBundle("~/Scripts/bootstrap").Include(
-                "~/Scripts/bootstrap.js"));
+                "~/Scripts/bootstrap.js",
+                "~/Scripts/jumbotron.js"));
 
             bundles.Add(new StyleBundle("~/Content/bootstrap-jumbotron").Include(
                 "~/Content/bootstrap.css",
