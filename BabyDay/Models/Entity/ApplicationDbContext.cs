@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using System.Data.Entity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BabyDay.Models.Entity
 {
@@ -9,9 +10,17 @@ namespace BabyDay.Models.Entity
         {
         }
 
-        public static ApplicationDbContext Create()
+        public DbSet<Parent> Parents { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            return new ApplicationDbContext();
+            //one-to-one
+            modelBuilder.Entity<Parent>().HasRequired<ApplicationUser>(s => s.UserProfile);
+            //one-to-many
+            modelBuilder.Entity<Child>()
+                        .HasRequired<Parent>(s => s.Parent) // Child entity requires Parent 
+                        .WithMany(s => s.Children); // Parent entity includes many Child entities
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

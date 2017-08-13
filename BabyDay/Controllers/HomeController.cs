@@ -15,12 +15,17 @@ namespace BabyDay.Controllers
         private readonly ApplicationUserManager _userManager;
         private readonly ApplicationSignInManager _signInManager;
         private readonly IAuthenticationManager _authenticationManager;
+        private readonly IUserStore<ApplicationUser> _applicationUserStore;
 
-        public HomeController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IAuthenticationManager authenticationManager)
+        public HomeController(ApplicationUserManager userManager,
+            ApplicationSignInManager signInManager,
+            IAuthenticationManager authenticationManager,
+            IUserStore<ApplicationUser> applicationUserStore)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _authenticationManager = authenticationManager;
+            _applicationUserStore = applicationUserStore;
         }
 
         [AllowAnonymous]
@@ -86,7 +91,13 @@ namespace BabyDay.Controllers
                 var result = await _userManager.CreateAsync(user, signupData.Password);
                 if (result.Succeeded)
                 {
+                    // If isPersistent is set to false, the browser will acquire session cookie which gets cleared when the browser is closed.
+                    // rememberBrowser is relevant only in Two-factor authentication
                     await _signInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    ((ApplicationUserStore) _applicationUserStore).Parents.Add(new Parent() {UserProfile = user});
+
+                    ((ApplicationUserStore)_applicationUserStore).SaveOrUpdate();
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -106,6 +117,13 @@ namespace BabyDay.Controllers
         public ActionResult Logout()
         {
             _authenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("Index", "Home");
+        }
+        
+        [ValidateAntiForgeryToken]
+        public ActionResult AddChild()
+        {
+            Parent p = ((ApplicationUserStore)_applicationUserStore).FindParentByUserId(User.Identity.GetUserId());
             return RedirectToAction("Index", "Home");
         }
 
