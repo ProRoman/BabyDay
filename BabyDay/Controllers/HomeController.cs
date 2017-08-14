@@ -119,8 +119,8 @@ namespace BabyDay.Controllers
             _authenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
-        
-        [ValidateAntiForgeryToken]
+
+        [HttpGet]
         public ActionResult AddChild()
         {
             Parent p = ((ApplicationUserStore)_applicationUserStore).FindParentByUserId(User.Identity.GetUserId());

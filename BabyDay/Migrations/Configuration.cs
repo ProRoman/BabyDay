@@ -9,7 +9,7 @@ namespace BabyDay.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
             ContextKey = "BabyDay.Models.Entity.ApplicationDbContext";
         }
 
