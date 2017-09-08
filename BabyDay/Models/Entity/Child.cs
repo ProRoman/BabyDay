@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BabyDay.Models.Entity
 {
-    public class Child
+    public class Child : IEntityModel<int>
     {
-        public int ChildId { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
@@ -14,6 +14,7 @@ namespace BabyDay.Models.Entity
 
         public int ParentId { get; set; }
 
+        [ForeignKey("ParentId")]
         public virtual Parent Parent { get; set; }
     }
 }

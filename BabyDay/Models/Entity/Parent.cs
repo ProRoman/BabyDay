@@ -4,14 +4,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BabyDay.Models.Entity
 {
-    public class Parent
+    public class Parent : IEntityModel<int>
     {
         public Parent()
         {
             Children = new List<Child>();
         }
 
-        public int ParentId { get; set; }
+        public int Id { get; set; }
 
         [Column(TypeName = "datetime2")]
         public DateTime BirthDate { get; set; }

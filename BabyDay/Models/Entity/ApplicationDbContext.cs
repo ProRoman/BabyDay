@@ -8,9 +8,7 @@ namespace BabyDay.Models.Entity
         public ApplicationDbContext()
             : base("DefaultConnection", false)
         {
-        }
-
-        public DbSet<Parent> Parents { get; set; }
+        }              
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

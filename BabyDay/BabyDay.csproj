@@ -195,6 +195,10 @@
     <Compile Include="Migrations\201708140712533_ParentChild.Designer.cs">
       <DependentUpon>201708140712533_ParentChild.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709080927482_AddEntityModel.cs" />
+    <Compile Include="Migrations\201709080927482_AddEntityModel.Designer.cs">
+      <DependentUpon>201709080927482_AddEntityModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\MigrationsLoggerImpl.cs" />
     <Compile Include="Migrations\MigrationsRunner.cs" />
@@ -202,6 +206,7 @@
     <Compile Include="Models\Entity\ApplicationUser.cs" />
     <Compile Include="Models\Entity\ApplicationUserStore.cs" />
     <Compile Include="Models\Entity\Child.cs" />
+    <Compile Include="Models\Entity\IEntityModel.cs" />
     <Compile Include="Models\Entity\Parent.cs" />
     <Compile Include="Models\SigninData.cs" />
     <Compile Include="Models\SignupData.cs" />
@@ -231,6 +236,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201708140712533_ParentChild.resx">
       <DependentUpon>201708140712533_ParentChild.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709080927482_AddEntityModel.resx">
+      <DependentUpon>201709080927482_AddEntityModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

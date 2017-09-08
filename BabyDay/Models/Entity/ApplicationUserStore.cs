@@ -9,21 +9,12 @@ namespace BabyDay.Models.Entity
         public ApplicationUserStore(ApplicationDbContext context)
             : base(context)
         {
-        }
+        }        
 
-        public DbSet<Parent> Parents
-        {
-            get
-            {
-                ApplicationDbContext context = (ApplicationDbContext)Context;
-                return context.Parents;
-            }
-        }
-
-        public Parent FindParentByUserId(string id)
+        public TEntity FindEntityById<TEntity, TId>(TId id) where TEntity : class, IEntityModel<TId>
         {
             ApplicationDbContext context = (ApplicationDbContext)Context;
-            return context.Parents.First(p => p.UserProfile.Id == id);
+            return context.Set<TEntity>().First(p => p.Id.Equals(id));
         }
 
         public void SaveOrUpdate()

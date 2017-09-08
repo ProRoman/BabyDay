@@ -2,10 +2,11 @@
 using BabyDay.Models.Entity;
 using BabyDay.Services;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace BabyDay.Controllers
 {
@@ -95,7 +96,7 @@ namespace BabyDay.Controllers
                     // rememberBrowser is relevant only in Two-factor authentication
                     await _signInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    ((ApplicationUserStore) _applicationUserStore).Parents.Add(new Parent() {UserProfile = user});
+                    ((ApplicationUserStore)_applicationUserStore).Context.Set<Parent>().Add(new Parent() { UserProfile = user });
 
                     ((ApplicationUserStore)_applicationUserStore).SaveOrUpdate();
 
@@ -123,7 +124,7 @@ namespace BabyDay.Controllers
         [HttpGet]
         public ActionResult AddChild()
         {
-            Parent p = ((ApplicationUserStore)_applicationUserStore).FindParentByUserId(User.Identity.GetUserId());
+            ApplicationUser profile = ((ApplicationUserStore)_applicationUserStore).Context.Set<ApplicationUser>().First(e => e.Id.Equals(User.Identity.GetUserId()));
             return RedirectToAction("Index", "Home");
         }
 
